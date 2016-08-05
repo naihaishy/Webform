@@ -117,7 +117,7 @@ if(current_user_can('manage_options')){
 	 */
 	function column_cb( $item ) {
 		return sprintf(
-			'<input type="checkbox" name="bulk-look[]" value="%s" />', $item['id']
+			'<input type="checkbox" name="bulk-email[]" value="%s" />', $item['email']
 		);
 	}
 
@@ -209,7 +209,7 @@ if(current_user_can('manage_options')){
 	 */
 	public function get_bulk_actions() {
 		$actions =array(
-			'bulk-look' => '查看'
+			'bulk-email' => '群发邮件'
 		);
 		return $actions;
 	}
@@ -270,6 +270,22 @@ if(current_user_can('manage_options')){
 		             //wp_redirect( esc_url_raw(add_query_arg(array('page' => 'hustca_applyit'), 'http://www.hustca.com/news/wp-admin/admin.php')) );
 				exit;
 			}
+
+		}
+		
+		
+		 	 // If the  email bulk action is triggered
+		if  ( isset( $_POST['action'] ) && $_POST['action'] == 'bulk-email' )   
+		 {
+
+			$email_bluks = $_POST['bulk-email'] ;
+			$emails = implode(',',$email_bluks);
+			$base = admin_url().'/admin.php';
+			$area_params['page'] ='send_email';
+			$area_params['action'] ='email';
+  		$area_params['address'] =$emails;
+  		$area_params['info'] ='已经自动填充到收件人的邮箱地址：'.$emails;
+	    wp_redirect(add_query_arg( $area_params, $base ));
 
 		}
 

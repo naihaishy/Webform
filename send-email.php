@@ -130,7 +130,7 @@ function send_naihai_wp_mail_smtp_options_page() {
 					<tr valign="top">
 					<th scope="row"><label for="to">收件地址</label></th>
 					<td><input name="send_email_to" type="text" id="send_email_to" value="<?php echo $show_send_email_to;?>" size="40" class="code" />
-					<span class="description">请输入收件人地址</span></td>
+					<span class="description">请输入收件人地址 &nbsp;发送多个请以逗号隔开  </span>[ <span style="color:green;">英文半角 , </span>]</td>
 				</tr>
 				<tr valign="top">
 					<th scope="row"><label for="send_email_message">内容</label></th>
