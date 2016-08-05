@@ -141,7 +141,27 @@ class Customers_List extends WP_List_Table {
 		return $title . $this->row_actions( $actions );
 	}
 
+		/**
+	 * Send email using smtp
+	 *
+	 * @send email plugin author:naihai 
+	 *
+	 * @return string
+	 */
+		function column_email( $item ) {
 
+		//$email_nonce = wp_create_nonce( 'sp_delete_customer' );
+
+		$email = '<strong>' . $item['email'] . '</strong>';
+		$nh ="\n";
+		$actions = array(
+			'email' => sprintf( '<a href="?page=%s&action=%s&address=%s&info=%s">发送邮件</a>','send_email', 'mail', 
+			urlencode( $item['email'] ), urlencode('姓名:'.$item['name'].$nh.'手机号码:'.$item['tel'].$nh.'专业:'.$item['major']))
+		);
+
+		return $email . $this->row_actions( $actions );
+	}
+	
 	/**
 	 *  Associative array of columns
 	 *
@@ -343,6 +363,4 @@ function cmp_do_output_buffer() {
 add_action('init', 'cmp_do_output_buffer');
 
 
-require_once('webapply.php');
-require_once('applyit.php');
-require_once('staff.php');
+require_once('config.php');

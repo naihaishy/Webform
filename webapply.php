@@ -142,7 +142,26 @@ if(current_user_can('manage_options')){
 		return $title . $this->row_actions( $actions );
 	}
 
+			/**
+	 * Send email using smtp
+	 *
+	 * @send email plugin author:naihai 
+	 *
+	 * @return string
+	 */
+		function column_email( $item ) {
 
+		//$email_nonce = wp_create_nonce( 'sp_delete_customer' );
+
+		$email = '<strong>' . $item['email'] . '</strong>';
+		$nh ="\n";
+		$actions = array(
+			'email' => sprintf( '<a href="?page=%s&action=%s&address=%s&info=%s">发送邮件</a>','send_email', 'mail', 
+			urlencode( $item['email'] ), urlencode('姓名:'.$item['name'].$nh.'手机号码:'.$item['tel'].$nh.'专业:'.$item['major']))
+		);
+
+		return $email . $this->row_actions( $actions );
+	}
 	/**
 	 *  Associative array of columns
 	 *
